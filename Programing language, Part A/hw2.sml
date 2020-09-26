@@ -30,6 +30,33 @@ fun get_substitutions1(strs_lists, str) =
 				   NONE => get_substitutions1(xs', str)
 				 | SOME y => y @ get_substitutions1(xs', str)
 
+(* c *)
+fun get_substitutions2(strs_lists, str) =
+	let
+		fun moving_helper(current, acc) = 
+			case current of
+				[] => acc
+      		  | x::xs' =>  case all_except_option(str, x) of
+								NONE => get_substitutions2(xs', str)
+				 			  | SOME y => moving_helper(xs', acc @ y)
+	in
+		moving_helper(strs_lists, [])
+	end
+
+(* d *)
+fun similar_names(strs, name) = 
+	let
+		val {first=frt, middle=mid, last=lst} = name
+		val final_names = get_substitutions2(strs, frt)
+		fun full_name(names) = 
+			case names of
+				[] => []
+			  | x::xs' => {first=x, middle=mid, last=lst} :: full_name(xs')
+	in
+		name :: full_name(final_names)
+	end
+
+
 
 (* you may assume that Num is always used with values 2, 3, ..., 10
    though it will not really come up *)
