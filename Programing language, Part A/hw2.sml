@@ -132,6 +132,7 @@ fun score(cs, goal) =
 
 
 	end
+
 (* 2-g *)
 fun officiate(cards, moves, goal) =
   let
