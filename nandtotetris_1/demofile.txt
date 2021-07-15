@@ -1,0 +1,7 @@
+// This is a test file
+
+// Assign 123 to memory[10]
+@123
+D=A // line with comment
+@10
+M=D
